@@ -4,17 +4,276 @@ Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to `Semantic Versioning <https://semver.org/>`__.
 
-`Unreleased <https://github.com/jpadilla/pyjwt/compare/2.1.0...HEAD>`__
+`Unreleased <https://github.com/jpadilla/pyjwt/compare/2.10.1...HEAD>`__
+------------------------------------------------------------------------
+
+
+`v2.10.1 <https://github.com/jpadilla/pyjwt/compare/2.10.0...2.10.1>`__
+-----------------------------------------------------------------------
+
+
+Fixed
+~~~~~
+
+- Prevent partial matching of `iss` claim by @fabianbadoi in `GHSA-75c5-xw7c-p5pm <https://github.com/jpadilla/pyjwt/security/advisories/GHSA-75c5-xw7c-p5pm>`__
+
+
+`v2.10.0 <https://github.com/jpadilla/pyjwt/compare/2.9.0...2.10.0>`__
+-----------------------------------------------------------------------
+
+
+Changed
+~~~~~~~
+
+- Remove algorithm requirement from JWT API, instead relying on JWS API for enforcement, by @luhn in `#975 <https://github.com/jpadilla/pyjwt/pull/975>`__
+- Use ``Sequence`` for parameter types rather than ``List`` where applicable by @imnotjames in `#970 <https://github.com/jpadilla/pyjwt/pull/970>`__
+- Add JWK support to JWT encode by @luhn in `#979 <https://github.com/jpadilla/pyjwt/pull/979>`__
+- Encoding and decoding payloads using the `none` algorithm by @jpadilla in `#c2629f6 <https://github.com/jpadilla/pyjwt/commit/c2629f66c593459e02616048443231ccbe18be16>`
+
+  Before:
+
+  .. code-block:: pycon
+
+   >>> import jwt
+   >>> jwt.encode({"payload": "abc"}, key=None, algorithm=None)
+
+  After:
+
+  .. code-block:: pycon
+
+   >>> import jwt
+   >>> jwt.encode({"payload": "abc"}, key=None, algorithm="none")
+
+- Added validation for 'sub' (subject) and 'jti' (JWT ID) claims in tokens by @Divan009 in `#1005 <https://github.com/jpadilla/pyjwt/pull/1005>`__
+- Refactor project configuration files from ``setup.cfg`` to ``pyproject.toml`` by @cleder in `#995 <https://github.com/jpadilla/pyjwt/pull/995>`__
+- Ruff linter and formatter changes by @gagandeepp in `#1001 <https://github.com/jpadilla/pyjwt/pull/1001>`__
+- Drop support for Python 3.8 (EOL) by @kkirsche in `#1007 <https://github.com/jpadilla/pyjwt/pull/1007>`__
+
+
+Fixed
+~~~~~
+
+- Encode EC keys with a fixed bit length by @etianen in `#990 <https://github.com/jpadilla/pyjwt/pull/990>`__
+- Add an RTD config file to resolve Read the Docs build failures by @kurtmckee in `#977 <https://github.com/jpadilla/pyjwt/pull/977>`__
+- Docs: Update ``iat`` exception docs by @pachewise in `#974 <https://github.com/jpadilla/pyjwt/pull/974>`__
+- Docs: Fix ``decode_complete`` scope and algorithms by @RbnRncn in `#982 <https://github.com/jpadilla/pyjwt/pull/982>`__
+- Fix doctest for ``docs/usage.rst`` by @pachewise in `#986 <https://github.com/jpadilla/pyjwt/pull/986>`__
+- Fix ``test_utils.py`` not to xfail by @pachewise in `#987 <https://github.com/jpadilla/pyjwt/pull/987>`__
+- Docs: Correct `jwt.decode` audience param doc expression by @peter279k in `#994 <https://github.com/jpadilla/pyjwt/pull/994>`__
+
+Added
+~~~~~
+
+
+- Add support for python 3.13 by @hugovk in `#972 <https://github.com/jpadilla/pyjwt/pull/972>`__
+- Create SECURITY.md by @auvipy and @jpadilla in `#973 <https://github.com/jpadilla/pyjwt/pull/973>`__
+- Docs: Add PS256 encoding and decoding usage by @peter279k in `#992 <https://github.com/jpadilla/pyjwt/pull/992>`__
+- Docs: Add API docs for PyJWK by @luhn in `#980 <https://github.com/jpadilla/pyjwt/pull/980>`__
+- Docs: Add EdDSA algorithm encoding/decoding usage by @peter279k in `#993 <https://github.com/jpadilla/pyjwt/pull/993>`__
+- Include checkers and linters for ``pyproject.toml`` in ``pre-commit`` by @cleder in `#1002 <https://github.com/jpadilla/pyjwt/pull/1002>`__
+- Docs: Add ES256 decoding usage by @Gautam-Hegde in `#1003 <https://github.com/jpadilla/pyjwt/pull/1003>`
+
+`v2.9.0 <https://github.com/jpadilla/pyjwt/compare/2.8.0...2.9.0>`__
 -----------------------------------------------------------------------
 
 Changed
 ~~~~~~~
+
+- Drop support for Python 3.7 (EOL) by @hugovk in `#910 <https://github.com/jpadilla/pyjwt/pull/910>`__
+- Allow JWT issuer claim validation to accept a list of strings too by @mattpollak in `#913 <https://github.com/jpadilla/pyjwt/pull/913>`__
+
+Fixed
+~~~~~
+
+- Fix unnecessary string concatenation by @sirosen in `#904 <https://github.com/jpadilla/pyjwt/pull/904>`__
+- Fix docs for ``jwt.decode_complete`` to include ``strict_aud`` option by @woodruffw in `#923 <https://github.com/jpadilla/pyjwt/pull/923>`__
+- Fix docs step by @jpadilla in `#950 <https://github.com/jpadilla/pyjwt/pull/950>`__
+- Fix: Remove an unused variable from example code block by @kenkoooo in `#958 <https://github.com/jpadilla/pyjwt/pull/958>`__
+
+Added
+~~~~~
+
+- Add support for Python 3.12 by @hugovk in `#910 <https://github.com/jpadilla/pyjwt/pull/910>`__
+- Improve performance of ``is_ssh_key`` + add unit test by @bdraco in `#940 <https://github.com/jpadilla/pyjwt/pull/940>`__
+- Allow ``jwt.decode()`` to accept a PyJWK object by @luhn in `#886 <https://github.com/jpadilla/pyjwt/pull/886>`__
+- Make ``algorithm_name`` attribute available on PyJWK by @luhn in `#886 <https://github.com/jpadilla/pyjwt/pull/886>`__
+- Raise ``InvalidKeyError`` on invalid PEM keys to be compatible with cryptography 42.x.x by @CollinEMac in `#952 <https://github.com/jpadilla/pyjwt/pull/952>`__
+- Raise an exception when required cryptography dependency is missing by @tobloef in `<https://github.com/jpadilla/pyjwt/pull/963>`__
+
+`v2.8.0 <https://github.com/jpadilla/pyjwt/compare/2.7.0...2.8.0>`__
+-----------------------------------------------------------------------
+
+Changed
+~~~~~~~
+
+- Update python version test matrix by @auvipy in `#895 <https://github.com/jpadilla/pyjwt/pull/895>`__
 
 Fixed
 ~~~~~
 
 Added
 ~~~~~
+
+- Add ``strict_aud`` as an option to ``jwt.decode`` by @woodruffw in `#902 <https://github.com/jpadilla/pyjwt/pull/902>`__
+- Export PyJWKClientConnectionError class by @daviddavis in `#887 <https://github.com/jpadilla/pyjwt/pull/887>`__
+- Allows passing of ssl.SSLContext to PyJWKClient by @juur in `#891 <https://github.com/jpadilla/pyjwt/pull/891>`__
+
+`v2.7.0 <https://github.com/jpadilla/pyjwt/compare/2.6.0...2.7.0>`__
+-----------------------------------------------------------------------
+
+Changed
+~~~~~~~
+
+- Changed the error message when the token audience doesn't match the expected audience by @irdkwmnsb `#809 <https://github.com/jpadilla/pyjwt/pull/809>`__
+- Improve error messages when cryptography isn't installed by @Viicos in `#846 <https://github.com/jpadilla/pyjwt/pull/846>`__
+- Make `Algorithm` an abstract base class by @Viicos in `#845 <https://github.com/jpadilla/pyjwt/pull/845>`__
+- ignore invalid keys in a jwks by @timw6n in `#863 <https://github.com/jpadilla/pyjwt/pull/863>`__
+
+Fixed
+~~~~~
+
+- Add classifier for Python 3.11 by @eseifert in `#818 <https://github.com/jpadilla/pyjwt/pull/818>`__
+- Fix ``_validate_iat`` validation by @Viicos in `#847 <https://github.com/jpadilla/pyjwt/pull/847>`__
+- fix: use datetime.datetime.timestamp function to have a milliseconds by @daillouf `#821 <https://github.com/jpadilla/pyjwt/pull/821>`__
+- docs: correct mistake in the changelog about verify param by @gbillig in `#866 <https://github.com/jpadilla/pyjwt/pull/866>`__
+
+Added
+~~~~~
+
+- Add ``compute_hash_digest`` as a method of ``Algorithm`` objects, which uses
+  the underlying hash algorithm to compute a digest. If there is no appropriate
+  hash algorithm, a ``NotImplementedError`` will be raised in `#775 <https://github.com/jpadilla/pyjwt/pull/775>`__
+- Add optional ``headers`` argument to ``PyJWKClient``. If provided, the headers
+  will be included in requests that the client uses when fetching the JWK set by @thundercat1 in `#823 <https://github.com/jpadilla/pyjwt/pull/823>`__
+- Add PyJWT._{de,en}code_payload hooks by @akx in `#829 <https://github.com/jpadilla/pyjwt/pull/829>`__
+- Add `sort_headers` parameter to `api_jwt.encode` by @evroon in `#832 <https://github.com/jpadilla/pyjwt/pull/832>`__
+- Make mypy configuration stricter and improve typing by @akx in `#830 <https://github.com/jpadilla/pyjwt/pull/830>`__
+- Add more types by @Viicos in `#843 <https://github.com/jpadilla/pyjwt/pull/843>`__
+- Add a timeout for PyJWKClient requests by @daviddavis in `#875 <https://github.com/jpadilla/pyjwt/pull/875>`__
+- Add client connection error exception by @daviddavis in `#876 <https://github.com/jpadilla/pyjwt/pull/876>`__
+- Add complete types to take all allowed keys into account by @Viicos in `#873 <https://github.com/jpadilla/pyjwt/pull/873>`__
+- Add `as_dict` option to `Algorithm.to_jwk` by @fluxth in `#881 <https://github.com/jpadilla/pyjwt/pull/881>`__
+
+
+`v2.6.0 <https://github.com/jpadilla/pyjwt/compare/2.5.0...2.6.0>`__
+-----------------------------------------------------------------------
+
+Changed
+~~~~~~~
+
+- bump up cryptography >= 3.4.0 by @jpadilla in `#807 <https://github.com/jpadilla/pyjwt/pull/807>`_
+- Remove `types-cryptography` from `crypto` extra by @lautat in `#805 <https://github.com/jpadilla/pyjwt/pull/805>`_
+
+Fixed
+~~~~~
+
+- Invalidate token on the exact second the token expires `#797 <https://github.com/jpadilla/pyjwt/pull/797>`_
+- fix: version 2.5.0 heading typo by @c0state in `#803 <https://github.com/jpadilla/pyjwt/pull/803>`_
+
+Added
+~~~~~
+- Adding validation for `issued_at` when `iat > (now + leeway)` as `ImmatureSignatureError` by @sriharan16 in https://github.com/jpadilla/pyjwt/pull/794
+
+`v2.5.0 <https://github.com/jpadilla/pyjwt/compare/2.4.0...2.5.0>`__
+-----------------------------------------------------------------------
+
+Changed
+~~~~~~~
+
+- Skip keys with incompatible alg when loading JWKSet by @DaGuich in `#762 <https://github.com/jpadilla/pyjwt/pull/762>`__
+- Remove support for python3.6 by @sirosen in `#777 <https://github.com/jpadilla/pyjwt/pull/777>`__
+- Emit a deprecation warning for unsupported kwargs by @sirosen in `#776 <https://github.com/jpadilla/pyjwt/pull/776>`__
+- Remove redundant wheel dep from pyproject.toml by @mgorny in `#765 <https://github.com/jpadilla/pyjwt/pull/765>`__
+- Do not fail when an unusable key occurs by @DaGuich in `#762 <https://github.com/jpadilla/pyjwt/pull/762>`__
+- Update audience typing by @JulianMaurin in `#782 <https://github.com/jpadilla/pyjwt/pull/782>`__
+- Improve PyJWKSet error accuracy by @JulianMaurin in `#786 <https://github.com/jpadilla/pyjwt/pull/786>`__
+- Mypy as pre-commit check + api_jws typing by @JulianMaurin in `#787 <https://github.com/jpadilla/pyjwt/pull/787>`__
+
+Fixed
+~~~~~
+
+- Adjust expected exceptions in option merging tests for PyPy3 by @mgorny in `#763 <https://github.com/jpadilla/pyjwt/pull/763>`__
+- Fixes for pyright on strict mode by @brandon-leapyear in `#747 <https://github.com/jpadilla/pyjwt/pull/747>`__
+- docs: fix simple typo, iinstance -> isinstance by @timgates42 in `#774 <https://github.com/jpadilla/pyjwt/pull/774>`__
+- Fix typo: priot -> prior by @jdufresne in `#780 <https://github.com/jpadilla/pyjwt/pull/780>`__
+- Fix for headers disorder issue by @kadabusha in `#721 <https://github.com/jpadilla/pyjwt/pull/721>`__
+
+Added
+~~~~~
+
+- Add to_jwk static method to ECAlgorithm by @leonsmith in `#732 <https://github.com/jpadilla/pyjwt/pull/732>`__
+- Expose get_algorithm_by_name as new method by @sirosen in `#773 <https://github.com/jpadilla/pyjwt/pull/773>`__
+- Add type hints to jwt/help.py and add missing types dependency by @kkirsche in `#784 <https://github.com/jpadilla/pyjwt/pull/784>`__
+- Add cacheing functionality for JWK set by @wuhaoyujerry in `#781 <https://github.com/jpadilla/pyjwt/pull/781>`__
+
+`v2.4.0 <https://github.com/jpadilla/pyjwt/compare/2.3.0...2.4.0>`__
+-----------------------------------------------------------------------
+
+Security
+~~~~~~~~
+
+- [CVE-2022-29217] Prevent key confusion through non-blocklisted public key formats. https://github.com/jpadilla/pyjwt/security/advisories/GHSA-ffqj-6fqr-9h24
+
+Changed
+~~~~~~~
+
+- Explicit check the key for ECAlgorithm by @estin in https://github.com/jpadilla/pyjwt/pull/713
+- Raise DeprecationWarning for jwt.decode(verify=...) by @akx in https://github.com/jpadilla/pyjwt/pull/742
+
+Fixed
+~~~~~
+
+- Don't use implicit optionals by @rekyungmin in https://github.com/jpadilla/pyjwt/pull/705
+- documentation fix: show correct scope for decode_complete() by @sseering in https://github.com/jpadilla/pyjwt/pull/661
+- fix: Update copyright information by @kkirsche in https://github.com/jpadilla/pyjwt/pull/729
+- Don't mutate options dictionary in .decode_complete() by @akx in https://github.com/jpadilla/pyjwt/pull/743
+
+Added
+~~~~~
+
+- Add support for Python 3.10 by @hugovk in https://github.com/jpadilla/pyjwt/pull/699
+- api_jwk: Add PyJWKSet.__getitem__ by @woodruffw in https://github.com/jpadilla/pyjwt/pull/725
+- Update usage.rst by @guneybilen in https://github.com/jpadilla/pyjwt/pull/727
+- Docs: mention performance reasons for reusing RSAPrivateKey when encoding by @dmahr1 in https://github.com/jpadilla/pyjwt/pull/734
+- Fixed typo in usage.rst by @israelabraham in https://github.com/jpadilla/pyjwt/pull/738
+- Add detached payload support for JWS encoding and decoding by @fviard in https://github.com/jpadilla/pyjwt/pull/723
+- Replace various string interpolations with f-strings by @akx in https://github.com/jpadilla/pyjwt/pull/744
+- Update CHANGELOG.rst by @hipertracker in https://github.com/jpadilla/pyjwt/pull/751
+
+`v2.3.0 <https://github.com/jpadilla/pyjwt/compare/2.2.0...2.3.0>`__
+-----------------------------------------------------------------------
+
+Fixed
+~~~~~
+
+- Revert "Remove arbitrary kwargs." `#701 <https://github.com/jpadilla/pyjwt/pull/701>`__
+
+Added
+~~~~~
+
+- Add exception chaining `#702 <https://github.com/jpadilla/pyjwt/pull/702>`__
+
+`v2.2.0 <https://github.com/jpadilla/pyjwt/compare/2.1.0...2.2.0>`__
+-----------------------------------------------------------------------
+
+Changed
+~~~~~~~
+
+- Remove arbitrary kwargs. `#657 <https://github.com/jpadilla/pyjwt/pull/657>`__
+- Use timezone package as Python 3.5+ is required. `#694 <https://github.com/jpadilla/pyjwt/pull/694>`__
+
+Fixed
+~~~~~
+- Assume JWK without the "use" claim is valid for signing as per RFC7517 `#668 <https://github.com/jpadilla/pyjwt/pull/668>`__
+- Prefer `headers["alg"]` to `algorithm` in `jwt.encode()`. `#673 <https://github.com/jpadilla/pyjwt/pull/673>`__
+- Fix aud validation to support {'aud': null} case. `#670 <https://github.com/jpadilla/pyjwt/pull/670>`__
+- Make `typ` optional in JWT to be compliant with RFC7519. `#644 <https://github.com/jpadilla/pyjwt/pull/644>`__
+-  Remove upper bound on cryptography version. `#693 <https://github.com/jpadilla/pyjwt/pull/693>`__
+
+Added
+~~~~~
+
+- Add support for Ed448/EdDSA. `#675 <https://github.com/jpadilla/pyjwt/pull/675>`__
 
 `v2.1.0 <https://github.com/jpadilla/pyjwt/compare/2.0.1...2.1.0>`__
 --------------------------------------------------------------------
@@ -126,6 +385,11 @@ For example, instead of
 ``jwt.decode(encoded, key, algorithms=["HS256"], options={"require_exp": True})``,
 use
 ``jwt.decode(encoded, key, algorithms=["HS256"], options={"require": ["exp"]})``.
+
+And the old v1.x syntax
+``jwt.decode(token, verify=False)``
+is now:
+``jwt.decode(jwt=token, key='secret', algorithms=['HS256'], options={"verify_signature": False})``
 
 Added
 ~~~~~
@@ -241,7 +505,7 @@ Pull Requests
    by @jdufresne
 -  Remove unnecessary Unicode decoding before json.loads() (#542) by
    @jdufresne
--  Remove unnecessary force\_bytes() calls priot to base64url\_decode()
+-  Remove unnecessary force\_bytes() calls prior to base64url\_decode()
    (#543) by @jdufresne
 -  Remove deprecated arguments from docs (#544) by @jdufresne
 -  Update code blocks in docs (#545) by @jdufresne
