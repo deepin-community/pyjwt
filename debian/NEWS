@@ -1,6 +1,6 @@
 pyjwt (2.1.0-1) unstable; urgency=medium
 
-  Commmandline script was removed upstream and there is not an alternative.
+  Commandline script was removed upstream and there is not an alternative.
   Who needs it should write something to cover the features they were using.
 
  -- Daniele Tricoli <eriol@debian.org>  Fri, 20 Aug 2021 02:12:02 +0200
